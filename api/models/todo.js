@@ -1,6 +1,3 @@
-var mongoose   = require('mongoose');
-var Schema     = mongoose.Schema;
-
 module.exports = mongoose.model('Todo', new Schema({
   todo_id: {type: Number, unique: true},
   name: String,
