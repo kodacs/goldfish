@@ -1,3 +1,6 @@
+const mongoose   = require('mongoose')
+const Schema     = mongoose.Schema
+
 module.exports = mongoose.model('Todo', new Schema({
   todo_id: {type: Number, unique: true},
   name: String,
@@ -6,4 +9,4 @@ module.exports = mongoose.model('Todo', new Schema({
   content: String,
   submit_date: {type: Date, default: Date.now},
   due_date: Date
-}));
+}))

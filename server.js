@@ -6,7 +6,6 @@ const bodyParser = require('body-parser')
 const logger     = require('morgan')
 const crypto     = require('crypto')
 const jwt        = require('jsonwebtoken')
-const Schema     = mongoose.Schema
 
 var app = express()
 
