@@ -9,4 +9,4 @@ module.exports = mongoose.model('Todo', new Schema({
   content: String,
   submit_date: {type: Date, default: Date.now},
   due_date: Date
-}))
+}, {collection: 'todos'}))

@@ -9,11 +9,8 @@ const jwt        = require('jsonwebtoken')
 
 var app = express()
 
-//
-var port = process.env.npm_package_config_port || 8080
-
 //database
-//mongoose.connect(process.env.npm_package_confi_database)
+mongoose.connect(process.env.npm_package_config_database)
 
 //middlewares
 app.use(express.static('dist'))
