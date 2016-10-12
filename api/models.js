@@ -13,3 +13,10 @@ module.exports = mongoose.model('Group', new Schema({
   mods: Array,
   users: Array
 }));
+
+module.exports = mongoose.model('Todo', new Schema({
+  name: String,
+  owner: String,
+  group: String,
+  todo: Array
+}));
