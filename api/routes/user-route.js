@@ -23,7 +23,9 @@ router.route('/')
     })
   })
   .post(function (req, res) {
-    res.send(passcrypt.create(req.body.password))
+    passcrypt.create(req.body.password, function(hash){
+      res.send(hash)
+    })
 
 //    var salt = crypto.randomBytes(128).toString("base64")
 //    var user = new User()

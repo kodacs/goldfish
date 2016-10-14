@@ -1,18 +1,16 @@
 var bcrypt = require('bcrypt');
 
-create = function (password) {
+module.exports.create = function (password, callback) {
   bcrypt.genSalt(process.env.npm_package_config_pwSaltRounds, function(err, salt) {
     bcrypt.hash(password, salt, function(err, hash) {
-      return hash
+      callback(hash)
     })
   })
 }
 
-compare = function (password, hash) {
+module.exports.compare = function (password, hash, callback) {
   bcrypt.compare(password, hash, function(err, res) {
-    return res
+    callback(res)
   })
 }
 
-module.exports.create = create
-module.exports.compare = compare

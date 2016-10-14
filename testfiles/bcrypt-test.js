@@ -10,9 +10,9 @@ bcrypt.genSalt(saltRounds, function(err, salt) {
       console.log(saltRounds, '\n' , salt, '\n', hash)
       bcrypt.compare(typedPW, hash, function(err, res) {
         if (res) {
-          console.log('jo');
+          console.log('good');
         } else {
-          console.log('nemjo')
+          console.log('nongood')
         }
       })
 
