@@ -1,5 +1,7 @@
 const express    = require('express')
 const mongoose   = require('mongoose')
+const bcrypt     = require('bcrypt')
+
 const passcrypt  = require('../middleware/passcrypt')
 
 var User         = mongoose.model('User')
@@ -14,18 +16,12 @@ var router       = express.Router()
 // default route: /api/user
 router.route('/')
   .get(function (req, res) {
-    User.find(function (err, users) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(users)
-      }
-    })
   })
   .post(function (req, res) {
-    passcrypt.create(req.body.password, function(hash){
-      res.send(hash)
+    passcrypt.hash(req.body.password, function(hash){
+      res.send('hash ' + hash)
     })
+  })
 
 //    var salt = crypto.randomBytes(128).toString("base64")
 //    var user = new User()
@@ -46,6 +42,6 @@ router.route('/')
 //        })
 //      }
 //    })
-  })
+//  })
 
 module.exports = router;

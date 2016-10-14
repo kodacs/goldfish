@@ -15,7 +15,7 @@ mongoose.connect(process.env.npm_package_config_database)
 app.use(express.static('dist'))
 app.use(bodyParser.urlencoded({ extended:false}))
 app.use(bodyParser.json())
-app.use(logger(':remote-addr - :remote-user [Odate[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
+app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'))
 app.set('signing', process.env.npm_package_config_secretkey)
 
 //API: models, routes

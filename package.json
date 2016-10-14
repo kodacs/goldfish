@@ -56,6 +56,6 @@
     "database": "mongodb://localhost/goldfish-test",
     "secretkey": "batmanrobinjokersupermanflashmartianmanhuntergreenlanternwonderwoman",
     "//": "yup, that is an 8 character long pw",
-    "pwSaltRounds": 10
+    "pwsr": 10
   }
 }
