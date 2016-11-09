@@ -16,32 +16,40 @@ var router       = express.Router()
 // default route: /api/user
 router.route('/')
   .get(function (req, res) {
+    User.find()
   })
   .post(function (req, res) {
-    passcrypt.hash(req.body.password, function(hash){
+    passcrypt.hash(req.body.password, function (hash){
       res.send('hash ' + hash)
     })
   })
 
-//    var salt = crypto.randomBytes(128).toString("base64")
-//    var user = new User()
-//    user.name = req.body.name
-//    user.admin = false
-//    crypto.pbkdf2(req.body.password, salt, 10000, 128, 'sha512', function (err, hash) {
-//      if (err) {
-//        res.send(err)
-//      } else {
-//        user.salt = salt
-//        user.passwordHash = hash.toString('hex')
-//        user.save(function (err) {
-//          if (err) {
-//            res.send(err)
-//          } else {
-//            res.json({ message: 'User created!' })
-//          }
-//        })
-//      }
-//    })
-//  })
+router.route('/add')
+  .post(function (req, res) {
+    passcrypt.hash(req.body.password, function (passhash) {
+      var addUser = new User({ 'name': req.body.name, 'password': passhash, 'email': req.body.email, 'admin': false})
+      addUser.save
+    })
+  })
+
+router.route('/name/:name')
+  .get(function (req, res) {
+    User.findOne({ 'name': req.param.name}, 'email', function (err, useremail) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send(useremail)
+      }
+    })
+  })
+
+router.route('/initsetup')
+  .get(function (req, res) {
+    passcrypt.hash('26_character_long_password', function(passhash) {
+      var addUser = new User({ 'name': 'superadmin', 'password': passhash, 'email': 'sum_ting_wong@horsecockmail.com', 'admin': true})
+      addUser.save
+      res.send('OK')
+    })
+  })
 
 module.exports = router;
