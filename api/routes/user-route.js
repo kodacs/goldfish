@@ -28,7 +28,13 @@ router.route('/add')
   .post(function (req, res) {
     passcrypt.hash(req.body.password, function (passhash) {
       var addUser = new User({ 'name': req.body.name, 'password': passhash, 'email': req.body.email, 'admin': false})
-      addUser.save
+      addUser.save(function (err) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.send('OK')
+        }
+      })
     })
   })
 
@@ -46,10 +52,20 @@ router.route('/name/:name')
 router.route('/initsetup')
   .get(function (req, res) {
     passcrypt.hash('26_character_long_password', function(passhash) {
-      var addUser = new User({ 'name': 'superadmin', 'password': passhash, 'email': 'sum_ting_wong@horsecockmail.com', 'admin': true})
-      addUser.save
-      res.send('OK')
+//      var addUser = new User({ 'name': 'superadmin', 'password': passhash, 'email': 'sum_ting_wong@horsecockmail.com', 'admin': true})
+      var addUser = new User()
+      addUser.name = 'superadmin'
+      addUser.password = passhash
+      addUser.email = 'sum_ting_wong@horsecockmail.com'
+      addUser.admin = true
+      addUser.save(function (err) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.send('OK')
+        }
+      })
     })
   })
 
-module.exports = router;
+module.exports = router
